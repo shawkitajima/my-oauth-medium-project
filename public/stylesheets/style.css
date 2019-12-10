@@ -1,0 +1,32 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+table {
+  width: 70%;
+  margin-bottom: 2rem;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment-holder {
+  display: flex;
+}
+
+.comment-holder > div > form > button {
+  color: red;
+  margin-left: 1rem;
+}
+
+.right {
+  margin-right: 2rem;
+}

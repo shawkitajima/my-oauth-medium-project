@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Compliment Me</title>
+    <!-- Google Icon Fonts used by Materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Materialize CSS Framework -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <!-- JavaScript for Materialize -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+  <body>
+    <nav>
+      <div>
+        <% if (activeUser) { %>
+          <a href="/logout" class="right">Logout</a>
+        <% } else {   %>
+          <a href="/auth/google" class="right"><i class="material-icons left">vpn_key</i>Login with Google</a>
+        <% } %>
+      </div>
+    </nav>
+    <h1>
+      Here are the current compliments!
+    </h1>
+    <% users.forEach(function(user) { %>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th><%=user.name%> says</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% user.comments.forEach(function(comment) { %>
+            <tr>
+              <td class="comment-holder">
+                <div>
+                  <%=comment%>
+                </div>
+                <% if (activeUser && user._id.equals(activeUser._id)) { %>
+                  <div>
+                    <form action="/users/<%=comment%>?_method=DELETE%>" method="POST">
+                      <button type="submit">X</button>
+                    </form>
+                  </div>
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+            <% if (activeUser && user._id.equals(activeUser._id)) { %>
+            <tr>
+              <td>
+                <form action="/users" method="POST">
+                  <label for="compliment">
+                    Add a compliment <input type="text" placeholder="something nice" name="compliment"> 
+                  </label>
+                  <button type="submit">Add</button>
+                </form>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    <% }) %>
+  </body>
+</html>
+  
